@@ -1,0 +1,506 @@
+/* ==========================================================================
+   Accuvision LASIK Candidacy Quiz - Scoped Styles
+   Prefix: .accu-quiz to prevent conflicts with WordPress themes
+   ========================================================================== */
+
+:root {
+  --accu-primary: #0b3b60;
+  --accu-primary-light: #165b94;
+  --accu-primary-dark: #07253d;
+  --accu-accent: #00a896;
+  --accu-accent-hover: #028090;
+  --accu-text-main: #1f2937;
+  --accu-text-muted: #64748b;
+  --accu-bg-card: #ffffff;
+  --accu-bg-page: #f8fafc;
+  --accu-border: #e2e8f0;
+  --accu-border-hover: #94a3b8;
+  --accu-border-active: #00a896;
+  --accu-success: #10b981;
+  --accu-warning: #f59e0b;
+  --accu-error: #ef4444;
+  --accu-radius: 12px;
+  --accu-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+  --accu-transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --accu-font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.accu-quiz-wrapper {
+  font-family: var(--accu-font);
+  color: var(--accu-text-main);
+  max-width: 680px;
+  margin: 30px auto;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+.accu-quiz-wrapper *,
+.accu-quiz-wrapper *::before,
+.accu-quiz-wrapper *::after {
+  box-sizing: border-box;
+}
+
+/* Card Container */
+.accu-quiz-card {
+  background: var(--accu-bg-card);
+  border: 1px solid var(--accu-border);
+  border-radius: var(--accu-radius);
+  box-shadow: var(--accu-shadow);
+  padding: 36px 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (max-width: 640px) {
+  .accu-quiz-card {
+    padding: 24px 20px;
+  }
+}
+
+/* Header */
+.accu-quiz-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.accu-quiz-badge {
+  display: inline-block;
+  background: rgba(0, 168, 150, 0.12);
+  color: var(--accu-accent-hover);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+
+.accu-quiz-title {
+  margin: 0 0 8px 0;
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: var(--accu-primary);
+  line-height: 1.25;
+}
+
+.accu-quiz-subtitle {
+  margin: 0;
+  color: var(--accu-text-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Progress Bar */
+.accu-quiz-progress-section {
+  margin-bottom: 28px;
+}
+
+.accu-quiz-progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--accu-text-muted);
+  margin-bottom: 8px;
+}
+
+.accu-quiz-progress-track {
+  width: 100%;
+  height: 8px;
+  background-color: #f1f5f9;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.accu-quiz-progress-fill {
+  height: 100%;
+  width: 16.6%;
+  background: linear-gradient(90deg, var(--accu-accent) 0%, var(--accu-primary-light) 100%);
+  border-radius: 999px;
+  transition: width 0.35s ease;
+}
+
+/* Step Container */
+.accu-quiz-step {
+  display: none;
+  animation: accuFadeIn 0.3s ease-in-out;
+}
+
+.accu-quiz-step.active {
+  display: block;
+}
+
+@keyframes accuFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.accu-step-question {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--accu-primary);
+  margin: 0 0 8px 0;
+}
+
+.accu-step-hint {
+  font-size: 0.875rem;
+  color: var(--accu-text-muted);
+  margin: 0 0 20px 0;
+}
+
+/* Selection Cards (Radio / Checkbox) */
+.accu-options-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.accu-option-label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border: 1.5px solid var(--accu-border);
+  border-radius: 10px;
+  background: #ffffff;
+  cursor: pointer;
+  transition: var(--accu-transition);
+  user-select: none;
+}
+
+.accu-option-label:hover {
+  border-color: var(--accu-border-hover);
+  background: #f8fafc;
+}
+
+.accu-option-input {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #cbd5e1;
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+  display: grid;
+  place-content: center;
+  margin: 0;
+  flex-shrink: 0;
+  transition: var(--accu-transition);
+}
+
+.accu-option-input[type="checkbox"] {
+  border-radius: 6px;
+}
+
+.accu-option-input:checked {
+  border-color: var(--accu-accent);
+  background-color: var(--accu-accent);
+}
+
+.accu-option-input[type="radio"]:checked::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background-color: #ffffff;
+  border-radius: 50%;
+}
+
+.accu-option-input[type="checkbox"]:checked::after {
+  content: "✔";
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.accu-option-label.selected {
+  border-color: var(--accu-accent);
+  background-color: rgba(0, 168, 150, 0.05);
+}
+
+.accu-option-text {
+  font-size: 0.96rem;
+  font-weight: 500;
+  color: var(--accu-text-main);
+  flex-grow: 1;
+}
+
+.accu-option-desc {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--accu-text-muted);
+  margin-top: 2px;
+  font-weight: 400;
+}
+
+/* Form Inputs for Contact Step */
+.accu-form-group {
+  margin-bottom: 16px;
+}
+
+.accu-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+@media (max-width: 500px) {
+  .accu-form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.accu-label {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--accu-primary);
+}
+
+.accu-input,
+.accu-textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid var(--accu-border);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: var(--accu-text-main);
+  transition: var(--accu-transition);
+  background-color: #ffffff;
+}
+
+.accu-input:focus,
+.accu-textarea:focus {
+  outline: none;
+  border-color: var(--accu-accent);
+  box-shadow: 0 0 0 3px rgba(0, 168, 150, 0.15);
+}
+
+.accu-input.error,
+.accu-textarea.error {
+  border-color: var(--accu-error);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
+.accu-error-msg {
+  color: var(--accu-error);
+  font-size: 0.8rem;
+  margin-top: 4px;
+  display: none;
+}
+
+.accu-error-msg.show {
+  display: block;
+}
+
+/* Action Buttons */
+.accu-quiz-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid var(--accu-border);
+}
+
+.accu-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--accu-transition);
+  border: none;
+  text-decoration: none;
+}
+
+.accu-btn-secondary {
+  background-color: #f1f5f9;
+  color: var(--accu-text-muted);
+}
+
+.accu-btn-secondary:hover {
+  background-color: #e2e8f0;
+  color: var(--accu-text-main);
+}
+
+.accu-btn-primary {
+  background-color: var(--accu-accent);
+  color: #ffffff;
+  margin-left: auto;
+}
+
+.accu-btn-primary:hover {
+  background-color: var(--accu-accent-hover);
+  box-shadow: 0 4px 12px rgba(0, 168, 150, 0.3);
+}
+
+.accu-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Result Screens */
+.accu-result-box {
+  border-radius: 10px;
+  padding: 28px 24px;
+  margin: 10px 0 24px 0;
+  text-align: left;
+}
+
+.accu-result-box.flagged {
+  background: #fffbeb;
+  border: 1.5px solid #fde68a;
+}
+
+.accu-result-box.disqualified {
+  background: #fef2f2;
+  border: 1.5px solid #fecaca;
+}
+
+.accu-result-box.qualified {
+  background: #f0fdf4;
+  border: 1.5px solid #bbf7d0;
+}
+
+.accu-result-status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.accu-result-box.flagged .accu-result-status-tag {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.accu-result-box.disqualified .accu-result-status-tag {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.accu-result-box.qualified .accu-result-status-tag {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.accu-result-heading {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 0 0 12px 0;
+  color: var(--accu-primary);
+}
+
+.accu-result-message {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: #334155;
+  margin: 0 0 16px 0;
+}
+
+.accu-result-cta-box {
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.accu-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--accu-transition);
+}
+
+.accu-cta-primary {
+  background: var(--accu-primary);
+  color: #ffffff;
+}
+
+.accu-cta-primary:hover {
+  background: var(--accu-primary-light);
+  color: #ffffff;
+}
+
+.accu-cta-outline {
+  background: transparent;
+  color: var(--accu-primary);
+  border: 1.5px solid var(--accu-primary);
+}
+
+.accu-cta-outline:hover {
+  background: var(--accu-primary);
+  color: #ffffff;
+}
+
+.accu-restart-link {
+  display: inline-block;
+  margin-top: 18px;
+  font-size: 0.88rem;
+  color: var(--accu-text-muted);
+  text-decoration: underline;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.accu-restart-link:hover {
+  color: var(--accu-primary);
+}
+
+/* Spinner */
+.accu-spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #ffffff;
+  animation: accuSpin 0.7s linear infinite;
+  margin-right: 6px;
+}
+
+@keyframes accuSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* WordPress Notice */
+.accu-wp-notice {
+  margin-top: 16px;
+  font-size: 0.8rem;
+  color: var(--accu-text-muted);
+  text-align: center;
+}

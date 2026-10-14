@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accuvision LASIK Candidacy Quiz</title>
+  <link rel="stylesheet" href="lasik-quiz.css">
+  <style>
+    /* Demo page wrapper (WordPress themes will provide their own page layout) */
+    body {
+      margin: 0;
+      padding: 40px 10px;
+      background-color: #eef2f6;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+  </style>
+</head>
+<body>
+
+<!-- =========================================================================
+     ACCUVISION LASIK CANDIDACY QUIZ COMPONENT
+     Copy everything within this wrapper for embedding into WordPress!
+     ========================================================================= -->
+<div class="accu-quiz-wrapper">
+  <div class="accu-quiz-card">
+    
+    <!-- Quiz Header -->
+    <div class="accu-quiz-header">
+      <span class="accu-quiz-badge">Accuvision Eye Center</span>
+      <h1 class="accu-quiz-title">LASIK Candidacy Self-Screening</h1>
+      <p class="accu-quiz-subtitle">Take this quick 60-second quiz to find out if you qualify for LASIK vision correction.</p>
+    </div>
+
+    <!-- Progress Indicator -->
+    <div class="accu-quiz-progress-section" id="accuProgressSection">
+      <div class="accu-quiz-progress-info">
+        <span>Step <span id="accuCurrentStepNum">1</span> of <span id="accuTotalStepNum">6</span></span>
+        <span class="accu-quiz-progress-pct">Quick Screening</span>
+      </div>
+      <div class="accu-quiz-progress-track">
+        <div class="accu-quiz-progress-fill" id="accuProgressFill"></div>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <form id="accuQuizForm" method="POST" action="" novalidate>
+      
+      <!-- ================= STEP 1: VISION CORRECTION & CONCERNS ================= -->
+      <div class="accu-quiz-step active" data-step="1">
+        <h2 class="accu-step-question">1. What type of vision correction do you currently use?</h2>
+        <p class="accu-step-hint">Select all that apply to you:</p>
+        
+        <div class="accu-options-grid" style="margin-bottom: 24px;">
+          <label class="accu-option-label">
+            <input type="checkbox" name="vision_correction[]" value="distance_glasses" class="accu-option-input">
+            <span class="accu-option-text">
+              Distance Glasses
+              <span class="accu-option-desc">Glasses for distance vision (driving, TV, outdoors)</span>
+            </span>
+          </label>
+
+          <label class="accu-option-label">
+            <input type="checkbox" name="vision_correction[]" value="bifocals" class="accu-option-input">
+            <span class="accu-option-text">
+              Bifocals or Progressives
+              <span class="accu-option-desc">Multifocal lenses for distance and near vision</span>
+            </span>
+          </label>
+
+          <label class="accu-option-label">
+            <input type="checkbox" name="vision_correction[]" value="contacts" class="accu-option-input">
+            <span class="accu-option-text">
+              Contact Lenses
+              <span class="accu-option-desc">Soft or hard contact lenses</span>
+            </span>
+          </label>
+
+          <label class="accu-option-label">
+            <input type="checkbox" name="vision_correction[]" value="readers" class="accu-option-input">
+            <span class="accu-option-text">
+              Reading Glasses / Readers Only
+              <span class="accu-option-desc">Magnifying glasses used strictly for close-up reading</span>
+            </span>
+          </label>
+
+          <label class="accu-option-label">
+            <input type="checkbox" name="vision_correction[]" value="none" class="accu-option-input">
+            <span class="accu-option-text">
+              I don't wear glasses or contact lenses
+              <span class="accu-option-desc">No corrective eyewear used currently</span>
+            </span>
+          </label>
+        </div>
+
+        <h2 class="accu-step-question">What is your primary visual concern?</h2>
+        <p class="accu-step-hint">Select the choice that best describes your daily difficulty:</p>
+
+        <div class="accu-options-grid">
+          <label class="accu-option-label">
+            <input type="radio" name="primary_concern" value="distance" class="accu-option-input">
+            <span class="accu-option-text">Trouble seeing things far away (Distance)</span>
+          </label>
+
+          <label class="accu-option-label">
+            <input type="radio" name="primary_concern" value="both" class="accu-option-input">
+            <span class="accu-option-text">Trouble seeing both near and far away</span>
+          </label>
+
+          <label class="accu-option-label">
+            <input type="radio" name="primary_concern" value="up_close_reading" class="accu-option-input">
+            <span class="accu-option-text">Trouble seeing up close / Trouble with Reading Only</span>
+          </label>
+
+          <label class="accu-option-label">
+            <input type="radio" name="primary_concern" value="astigmatism" class="accu-option-input">
+            <span class="accu-option-text">Astigmatism or blurry vision at all distances</span>
+          </label>
+        </div>
+
+        <div class="accu-error-msg"></div>
+      </div>
+
+      <!-- ================= STEP 2: PREVIOUS SURGERY ================= -->
+      <div class="accu-quiz-step" data-step="2">
+        <h2 class="accu-step-question">2. Have you previously had laser eye surgery?</h2>
+        <p class="accu-step-hint">This helps us determine whether an enhancement or retreatment evaluation is needed.</p>
+        
+        <div class="accu-options-grid">
+          <label class="accu-option-label">
+            <input type="radio" name="previous_surgery" value="no" class="accu-option-input">
+            <span class="accu-option-text">
+              No, I have never had laser eye surgery
+              <span class="accu-option-desc">This would be my first vision correction procedure</span>
+            </span>
+          </label>
+
+          <label class="accu-option-label">
+            <input type="radio" name="previous_surgery" value="yes" class="accu-option-input">
+            <span class="accu-option-text">
+              Yes, I have previously had LASIK or PRK
+              <span class="accu-option-desc">I have had laser vision correction performed in the past</span>
+            </span>
+          </label>
+        </div>
+
+        <div class="accu-error-msg"></div>
+      </div>
+
+      <!-- ================= STEP 3: MEDICAL CONDITIONS ================= -->
+      <div class="accu-quiz-step" data-step="3">
+        <h2 class="accu-step-question">3. Medical History &amp; Eye Health</h2>
+        <p class="accu-step-hint">Have you ever been diagnosed with or treated for any of the following? (Select all that apply):</p>
+        
+        <div class="accu-options-grid">
+          <label class="accu-option-label">
+            <input type="checkbox" name="conditions[]" value="cataracts" class="accu-option-input">
+            <span class="accu-option-text">Cataracts</span>
+          </label>
+
+          <label class="accu-option-label">
+            <input type="checkbox" name="conditions[]" value="keratoconus" class="accu-option-input">
+            <span class="accu-option-text">Keratoconus</span>
+          </label>
+
+          <label class="accu-option-label">
+            <input type="checkbox" name="conditions[]" value="macular_degeneration" class="accu-option-input">
+            <span class="accu-option-text">Macular Degeneration</span>
+          </label>
+
+          <label class="accu-option-label">
+            <input type="checkbox" name="conditions[]" value="fuchs_dystrophy" class="accu-option-input">
+            <span class="accu-option-text">Fuchs' Dystrophy</span>
+          </label>
+
+          <label class="accu-option-label">
+            <input type="checkbox" name="conditions[]" value="herpes_eye_infection" class="accu-option-input">
+            <span class="accu-option-text">Herpes Eye Infection (Ocular Herpes)</span>
+          </label>
+
+          <label class="accu-option-label">
+            <input type="checkbox" name="conditions[]" value="pacemaker" class="accu-option-input">
+            <span class="accu-option-text">Pacemaker</span>
+          </label>
+
+          <label class="accu-option-label">
+            <input type="checkbox" name="conditions[]" value="none" class="accu-option-input">
+            <span class="accu-option-text">None of the above</span>
+          </label>
+        </div>
+
+        <div class="accu-error-msg"></div>
+      </div>
+
+      <!-- ================= STEP 4: ACCUTANE MEDICATION ================= -->
+      <div class="accu-quiz-step" data-step="4">
+        <h2 class="accu-step-question">4. Current Medication Screening</h2>
+        <p class="accu-step-hint">Certain medications can impact corneal healing and tear production.</p>
+        
+        <div class="accu-options-grid">
+          <p style="font-weight: 600; color: #1e293b; margin: 0 0 10px 0;">Are you currently taking Accutane (isotretinoin)?</p>
+          
+          <label class="accu-option-label">
+            <input type="radio" name="accutane" value="no" class="accu-option-input">
+            <span class="accu-option-text">No, I do not take Accutane</span>
+          </label>
+
+          <label class="accu-option-label">
+            <input type="radio" name="accutane" value="yes" class="accu-option-input">
+            <span class="accu-option-text">Yes, I am currently taking Accutane</span>
+          </label>
+        </div>
+
+        <div class="accu-error-msg"></div>
+      </div>
+
+      <!-- ================= STEP 5: PREGNANCY OR NURSING ================= -->
+      <div class="accu-quiz-step" data-step="5">
+        <h2 class="accu-step-question">5. Pregnancy &amp; Nursing Status</h2>
+        <p class="accu-step-hint">Hormonal changes during pregnancy and nursing temporarily alter the shape and thickness of the cornea.</p>
+        
+        <div class="accu-options-grid">
+          <p style="font-weight: 600; color: #1e293b; margin: 0 0 10px 0;">Are you currently pregnant or nursing?</p>
+          
+          <label class="accu-option-label">
+            <input type="radio" name="pregnant" value="no" class="accu-option-input">
+            <span class="accu-option-text">No</span>
+          </label>
+
+          <label class="accu-option-label">
+            <input type="radio" name="pregnant" value="yes" class="accu-option-input">
+            <span class="accu-option-text">Yes, I am currently pregnant or nursing</span>
+          </label>
+
+          <label class="accu-option-label">
+            <input type="radio" name="pregnant" value="na" class="accu-option-input">
+            <span class="accu-option-text">Not Applicable</span>
+          </label>
+        </div>
+
+        <div class="accu-error-msg"></div>
+      </div>
+
+      <!-- ================= STEP 6: CONTACT INFORMATION ================= -->
+      <div class="accu-quiz-step" data-step="6">
+        <h2 class="accu-step-question">6. Where should we send your screening results?</h2>
+        <p class="accu-step-hint">Please provide your contact details to review your customized LASIK candidacy report.</p>
+        
+        <div class="accu-form-row">
+          <div class="accu-form-group">
+            <label class="accu-label">First Name *</label>
+            <input type="text" name="first_name" class="accu-input" placeholder="e.g. John" required>
+          </div>
+          <div class="accu-form-group">
+            <label class="accu-label">Last Name *</label>
+            <input type="text" name="last_name" class="accu-input" placeholder="e.g. Smith" required>
+          </div>
+        </div>
+
+        <div class="accu-form-row">
+          <div class="accu-form-group">
+            <label class="accu-label">Email Address *</label>
+            <input type="email" name="email" class="accu-input" placeholder="john.smith@example.com" required>
+          </div>
+          <div class="accu-form-group">
+            <label class="accu-label">Phone Number *</label>
+            <input type="tel" name="phone" class="accu-input" placeholder="(555) 000-0000" required>
+          </div>
+        </div>
+
+        <div class="accu-form-group">
+          <label class="accu-label">Additional Questions or Notes (Optional)</label>
+          <textarea name="notes" rows="3" class="accu-textarea" placeholder="Tell us about any specific vision goals or questions..."></textarea>
+        </div>
+
+        <div class="accu-error-msg"></div>
+      </div>
+
+      <!-- ================= STEP 7: OUTCOME / RESULTS ================= -->
+      <div class="accu-quiz-step" data-step="7">
+        <div id="accuResultContainer">
+          <!-- Populated dynamically via JavaScript with exact clinical response -->
+        </div>
+
+        <div style="text-align: center;">
+          <button type="button" class="accu-restart-link" id="accuRestartBtn">↺ Retake Screening Quiz</button>
+        </div>
+      </div>
+
+      <!-- Nav Controls -->
+      <div class="accu-quiz-actions">
+        <button type="button" class="accu-btn accu-btn-secondary" id="accuBtnPrev" style="display: none;">
+          ← Back
+        </button>
+        <button type="button" class="accu-btn accu-btn-primary" id="accuBtnNext">
+          Next Step →
+        </button>
+        <button type="submit" class="accu-btn accu-btn-primary" id="accuBtnSubmit" style="display: none;">
+          Submit &amp; See Results ➔
+        </button>
+      </div>
+
+    </form>
+
+    <div class="accu-wp-notice">
+      🔒 Your information is confidential and protected by standard medical privacy practices.
+    </div>
+
+  </div>
+</div>
+
+<script src="lasik-quiz.js"></script>
+</body>
+</html>
